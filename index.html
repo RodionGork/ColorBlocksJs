@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html>
+<head>
+    <title>Color Blocks in JavaScript</title>
+    <script src="./canvashelper.js"></script>
+    <script src="./colorblocks.js"></script>
+</head>
+<body>
+    <div><div style="text-align:center">
+    <canvas id="demo" width="600" height="400" style="border:5px solid #888;border-radius: 5px;background: black;"></canvas>
+    <br/>
+    <label>Score: <input type="text" disabled="true" value="0" id="score" size="7" style="text-align:center"/></label><br/>
+    <label>Seed: <input type="text" value="0" id="seed" size="5" style="text-align:center"/></label>
+    <input type="button" onclick="colorBlocks.reset()" value="Reset"/>
+    </div>
+
+    <script>
+    window.onload = function() {
+        colorBlocks = new ColorBlocks();
+    }
+    </script>
+
+</body>
+
