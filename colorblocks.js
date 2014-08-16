@@ -1,4 +1,4 @@
-function ColorBlocks() {
+function ColorBlocks(opts) {
     this.score = 0;
     this.size = 15;
     this.w = 35;
@@ -7,6 +7,11 @@ function ColorBlocks() {
     this.shades = ['#ff0000', '#ffff00', '#00dd00', '#4444ff'];
     this.ch = null;
     this.box = [];
+    if (typeof(opts) == 'object') {
+        for (var key in opts) {
+            this[key] = opts[key];
+        }
+    }
     this.init();
 }
 
@@ -105,6 +110,11 @@ ColorBlocks.prototype.onMouseDown = function(event) {
     var pos = this.ch.posFromEvent(event);
     this.remove(Math.floor(pos.x / this.size), this.h - Math.floor(pos.y / this.size) - 1);
     this.draw();
+    if (this.box[0][0] == 0) {
+        alert("You win " + this.score + " points!\n\nClick 'reset' to restart game\n"
+                + "change the seed and click 'reset' to play with different initial layout.");
+    }
+    event.preventDefault();
 }
 
 ColorBlocks.prototype.draw = function() {
