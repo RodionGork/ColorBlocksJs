@@ -62,8 +62,12 @@ ColorBlocks.prototype.remove = function(x, y) {
     }
     var cells = [{x: x, y: y}];
     var count = 0;
+    var seen = [];
     while (cells.length > 0) {
         var cur = cells.pop();
+        if (this.box[cur.x][cur.y] != c) {
+            continue;
+        }
         count++;
         this.box[cur.x][cur.y] = -1;
         if (cur.x > 0 && this.box[cur.x - 1][cur.y] == c) {
