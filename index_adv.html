@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html>
+<head>
+    <title>Color Blocks in JavaScript</title>
+    <script src="./canvashelper.js"></script>
+    <script src="./colorblocks.js"></script>
+</head>
+<body>
+    <div style="text-align:center">
+    <h1>Color Blocks</h1>
+    <h3>game demo for <a href="http://www.codeabbey.com/index/task_view/color-cubes-advanced">Color Cubes Advanced challenge</a></h3>
+    <p><a href="https://github.com/RodionGork/ColorBlocksJs">Project page at GitHub</a></p>
+    <canvas id="demo" width="600" height="400" style="border:5px solid #888;border-radius: 5px;background: black;"></canvas>
+    <br/>
+    <input type="hidden" id="seed" value="0"/>
+    <label>Score: <input type="text" disabled="true" value="0" id="score" style="text-align:center"/></label><br/>
+    <label>Initial setup:<br/><textarea id="initial"></textarea></label><br/>
+    <label>Moves: <input type="text" value="0 0" id="moves"/></label><br/>
+    <input type="button" onclick="colorBlocks.reset()" value="Reset"/>
+    </div>
+
+    <script>
+    window.onload = function() {
+        colorBlocks = new ColorBlocks({size:5,w:130,h:130});
+    }
+    </script>
+
+</body>
+
