@@ -7,7 +7,10 @@
     <script src="./colorblocks.js"></script>
 </head>
 <body>
-    <div><div style="text-align:center">
+    <div style="text-align:center">
+    <h1>Color Blocks</h1>
+    <h3>game demo for <a href="http://www.codeabbey.com/index/task_view/color-cubes">CodeAbbey problem</a></h3>
+    <p><a href="https://github.com/RodionGork/ColorBlocksJs">Project page at GitHub</a></p>
     <canvas id="demo" width="600" height="400" style="border:5px solid #888;border-radius: 5px;background: black;"></canvas>
     <br/>
     <label>Score: <input type="text" disabled="true" value="0" id="score" size="7" style="text-align:center"/></label><br/>
@@ -17,7 +20,7 @@
 
     <script>
     window.onload = function() {
-        colorBlocks = new ColorBlocks();
+        colorBlocks = new ColorBlocks({size:20});
     }
     </script>
 
