@@ -63,6 +63,8 @@ ColorBlocks.prototype.remove = function(x, y) {
     var cells = [{x: x, y: y}];
     var count = 0;
     var seen = [];
+    var minx = x;
+    var maxx = x;
     while (cells.length > 0) {
         var cur = cells.pop();
         if (this.box[cur.x][cur.y] != c) {
@@ -70,6 +72,8 @@ ColorBlocks.prototype.remove = function(x, y) {
         }
         count++;
         this.box[cur.x][cur.y] = -1;
+        minx = Math.min(minx, cur.x);
+        maxx = Math.max(maxx, cur.x);
         if (cur.x > 0 && this.box[cur.x - 1][cur.y] == c) {
             cells.push({x: cur.x - 1, y: cur.y});
         }
@@ -83,12 +87,12 @@ ColorBlocks.prototype.remove = function(x, y) {
             cells.push({x: cur.x, y: cur.y + 1});
         }
     }
-    this.sweep();
+    this.sweep(minx, maxx);
     this.score += count * (count + 1) / 2;
 }
 
-ColorBlocks.prototype.sweep = function() {
-    for (var x = 0; x < this.w; x++) {
+ColorBlocks.prototype.sweep = function(minx, maxx) {
+    for (var x = minx; x <= maxx; x++) {
         var col = [];
         for (var y = 0; y < this.h; y++) {
             var c = this.box[x][y];
