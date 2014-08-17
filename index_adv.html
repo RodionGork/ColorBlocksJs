@@ -15,14 +15,51 @@
     <br/>
     <input type="hidden" id="seed" value="0"/>
     <label>Score: <input type="text" disabled="true" value="0" id="score" style="text-align:center"/></label><br/>
-    <label>Initial setup:<br/><textarea id="initial"></textarea></label><br/>
-    <label>Moves: <input type="text" value="0 0" id="moves"/></label><br/>
-    <input type="button" onclick="colorBlocks.reset()" value="Reset"/>
+    <label>Initial setup:<br/><textarea placeholder="Paste Input Data here and press Setup" id="initial" style="width:500px;height:120px"></textarea></label><br/>
+    <input type="button" onclick="setup()" value="Setup"/><br/>
+    <label>Moves: <input placeholder="Copy your answer here and press Run" type="text" id="moves" style="width:500px"/></label><br/>
+    <input type="button" onclick="run()" value="Run"/>
     </div>
 
     <script>
     window.onload = function() {
-        colorBlocks = new ColorBlocks({size:5,w:130,h:130});
+        colorBlocks = new ColorBlocks({size:5,w:50,h:50});
+    }
+    
+    function setup() {
+        var initial = document.getElementById('initial').value.split('\n');
+        var sz = initial[0] * 1;
+        colorBlocks = new ColorBlocks({size:6,w:sz,h:sz});
+        for (var x = 0; x < sz; x++) {
+            for (var y = 0; y < sz; y++) {
+                colorBlocks.box[x][y] = initial[sz - y].substr(x, 1) * 1;
+            }
+        }
+        if (sz < 20) {
+            for (var i = 0; i < 10; i++) {
+                x = Math.floor(Math.random() * sz);
+                y = Math.floor(Math.random() * sz);
+                colorBlocks.box[x][y] = Math.floor(Math.random() * 4 + 1);
+            }
+        }
+        colorBlocks.draw();
+    }
+    
+    function run() {
+        window.moves = document.getElementById('moves').value.split(' ');
+        window.curMove = 0;
+        step();
+    }
+    
+    function step() {
+        if (curMove >= moves.length) {
+            return;
+        }
+        var x = moves[curMove++] * 1;
+        var y = moves[curMove++] * 1;
+        colorBlocks.remove(x, y);
+        colorBlocks.draw();
+        setInterval(step, 200);
     }
     </script>
 
